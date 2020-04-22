@@ -1,0 +1,36 @@
+version: '3.2'
+
+services:
+  grafana:
+    build:
+      context: grafana/
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - type: bind
+        source: ./data/var/lib/grafana
+        target: /var/lib/grafana
+        read_only: false
+      - type: bind
+        source: ./data/var/lib/grafana/plugins
+        target: /var/lib/grafana/plugins
+        read_only: false
+      - type: bind
+        source: ./data/etc/grafana
+        target: /etc/grafana
+        read_only: false
+      - type: bind
+        source: ./data/usr/share/grafana
+        target: /usr/share/grafana
+        read_only: false
+      - type: bind
+        source: ./data/var/log/grafana
+        target: /var/log/grafana
+        read_only: false
+      - type: bind
+        source: ./data/etc/grafana/provisioning
+        target: /etc/grafana/provisioning
+        read_only: false
+    user: "1000"
+    ports:
+      - "3000:3000"
